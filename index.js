@@ -14,11 +14,17 @@ class CountdownTimer {
 
     start() {
         setInterval(() => {
-            const currentTime = Date.now();
-            const deltaTime = this.targetDate - currentTime;
-            const time = this.getTimeComponents(deltaTime);
-            this.updateClockface(time)
+            if (this.targetDate <= Date.now()) {
+                 return
+            }
+            else {
+                const currentTime = Date.now();
+                const deltaTime = this.targetDate - currentTime;
+                const time = this.getTimeComponents(deltaTime);
+                this.updateClockface(time);
+            }
         }, 1000);
+        
     }
 
     getTimeComponents(time) {
@@ -39,10 +45,10 @@ class CountdownTimer {
 
     pad(value) {
         return String(value).padStart(2, '0');
-    }
+    } 
 }
 
 const timer = new CountdownTimer({
   selector: '#timer-1',
-  targetDate: new Date('Dec 23, 2021'),
+  targetDate: new Date('Jul 07, 2021'),
 });
